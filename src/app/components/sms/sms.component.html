@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="search">
+    <form id="searchForm" #searchForm="ngForm" (ngSubmit)="search()">
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
+          <div class="form-group">
+            <label for="messageType">Tipo de mensaje</label>
+            <mat-form-field>
+              <mat-select [(value)]="sms.message_type">
+                <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">
+                  {{ tipo.description }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="form-group">
+            <label for="language">Lenguaje de la plantilla</label>
+            <mat-form-field>
+              <mat-select [(value)]="sms.lang">
+                <mat-option *ngFor="let lang of langs" [value]="lang">
+                  {{ lang }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 offset-lg-4">
+          <button class="save-btn" type="submit" style="margin-bottom: 15px;">Buscar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="sms-container">
+    <form #smsForm="ngForm" (ngSubmit)="insertMessageTemplate()">
+      <div class="form-group">
+        <label for="title">Título de mensaje</label>
+        <input id="title" type="text" name="title" #title="ngModel" [(ngModel)]="sms.title" />
+      </div>
+      <div class="form-group">
+        <label for="message">Mensaje</label>
+        <textarea id="message" type="text" name="message" #name="ngModel" [(ngModel)]="sms.message" rows="5"></textarea>
+      </div>
+      <button class="save-btn" type="submit">Guardar</button>
+    </form>
+  </div>
+</div>

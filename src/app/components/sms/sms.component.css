@@ -1,0 +1,26 @@
+.sms-container{
+    max-width: 600px;
+    margin: auto;
+    margin-top: 25px;
+    background-color: #eee;
+    padding: 50px;
+    border-radius: 10px;
+}
+
+.save-btn{
+    padding: 15px 30px;
+    border-radius: 5px;
+}
+
+#searchForm .form-group{
+    display: inline-block;
+    margin: 20px !important;
+}
+
+.search{
+    text-align: center;
+    margin: auto;
+    max-width: 600px;
+    background-color: #eee;
+    border-radius: 10px;
+}

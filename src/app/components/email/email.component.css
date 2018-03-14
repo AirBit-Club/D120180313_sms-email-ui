@@ -1,0 +1,89 @@
+.preview{
+    background-color: #fff;
+    height: 100%;
+    overflow: scroll;
+}
+
+.editor-panel{
+    background-color: rgb(231, 231, 231);
+    padding: 30px;
+    box-shadow: 0 1px 10px rgba(0,0,0,0.25), 0 1px 1px rgba(0,0,0,0.22);
+    z-index: 1;
+    transition: all 0.5s ease-in; 
+}
+
+.editor-title{
+    letter-spacing: 2px;
+    font-weight: bold;
+    margin: 30px 0;
+}
+
+.template{
+    border: none;
+    background-color: white;
+    height: calc(100vh - 32px);
+    width: calc(100% - 520px);
+    transition: all 0.5s ease-in;
+}
+
+.save-btn{
+    padding: 15px 30px;
+    border-radius: 5px;
+}
+
+.hide-editor{
+    color: black;
+    outline: none;
+    cursor: pointer;
+}
+
+.show-editor{
+    color: black;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    background-color: #e7e7e7;
+    padding: 20px 30px 20px 20px;
+    border-radius: 30px 0 0 30px;
+    right: -10px;
+    z-index: 50;
+    top: 50%;
+    display: none;
+    transform: translateY(-50%);
+    box-shadow: 0 1px 10px rgba(0,0,0,0.25), 0 1px 1px rgba(0,0,0,0.22);
+
+    transition: all 0.5s ease;
+}
+
+.show-editor:hover{
+    right: 0;
+}
+
+.main{
+    height: calc(100vh - 75px);
+    width: 100%;
+}
+.preview{
+    height: 100%;
+    width: 70%;
+}
+.editor{
+    position: fixed;
+    width: 30%;
+    top: 75px;
+    right: 0;
+    bottom: 0;
+    overflow-y: scroll;
+}
+
+@media (min-width: 600px) and (max-width: 1200px){
+    .editor{
+        width: 50%
+    }
+}
+
+@media (max-width: 600px){
+    .editor{
+        width: 100%
+    }
+}
