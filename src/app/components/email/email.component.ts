@@ -1,63 +1,53 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
+import { EmailService } from '../../services/email.service';
+import { Email } from '../../models/email';
+
+declare var swal;
+
 @Component({
-  selector: 'email-editor',
+  selector: 'app-email-editor',
   templateUrl: './email.component.html',
-  styleUrls: ['./email.component.css']
+  styleUrls: ['./email.component.css'],
+  providers: [EmailService]
 })
 export class EmailComponent implements OnInit {
 
-  public template;
-  public doc;
-  public title;
-  public subtitle;
-  public question;
-  public additional;
   public langs;
-  public selectedLang = "EN";
+  public selectedLang = 'EN';
+  public email: Email;
 
-  constructor(  ) { }
+  constructor( private emailService: EmailService ) { }
 
   ngOnInit() {
-
-    this.langs = ['EN','ES','JA'];
-
-    let iframe:any = document.getElementById('iframe');
-    this.setTemplate();
-
-    /*if(iframe.contentDocument) this.doc = iframe.contentDocument;
-    else if(iframe.contentWindow) this.doc = iframe.contentWindow.document;
-    else this.doc = iframe.document;
-    
-    this.doc.write(this.template);
-    this.doc.close();*/
+    this.langs = ['EN', 'ES', 'JA'];
+    this.email = new Email('', '', '', '', '', 1, 1);
   }
 
-  setTemplate(){
-    this.template = '';
+  insertEmailTemplate() {
+    let params: string = '{"data":' + JSON.stringify(this.email) + '}';
+    this.emailService.createTemplate(params).subscribe(
+      response => {
+        swal('Ok', 'Success!', 'success');
+      }, 
+      error => {
+        console.log(params);
+        console.log(error);
+      }
+    );
   }
 
-  updatePreview(){
-    this.setTemplate();
-    this.doc.write(this.template);
-    this.doc.close();
-  } 
-
-  hideEditor(){
-    document.getElementById("editor-panel").setAttribute("style","right: -600px;");
-    document.getElementById("iframe").setAttribute("style","width: 100%;");
-    document.getElementById("show-btn").setAttribute("style","display: block;");
+  hideEditor() {
+    document.getElementById('editor-panel').setAttribute('style', 'right: -600px;');
+    document.getElementById('iframe').setAttribute('style', 'width: 100%;');
+    document.getElementById('show-btn').setAttribute('style', 'display: block;');
   }
 
-  showEditor(){
-    document.getElementById("editor-panel").setAttribute("style","right: 0;");
-    document.getElementById("iframe").setAttribute("style","width: 70%");
-    document.getElementById("show-btn").setAttribute("style","display: none;");
-  }
-
-  onSubmit(){
-    console.log("Submit ... " + this.selectedLang);
+  showEditor() {
+    document.getElementById('editor-panel').setAttribute('style', 'right: 0;');
+    document.getElementById('iframe').setAttribute('style', 'width: 70%');
+    document.getElementById('show-btn').setAttribute('style', 'display: none;');
   }
 
 }

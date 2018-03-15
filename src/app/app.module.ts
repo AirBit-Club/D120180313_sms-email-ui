@@ -1,20 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
-
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormsModule }   from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { EmailComponent } from './components/email/email.component';
-import { SmsComponent } from './components/sms/sms.component';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
-
-import { SmsService } from './services/sms.service'
+import { SmsComponent } from './components/sms/sms.component';
+import { SmsService } from './services/sms.service';
+import { EmailService } from './services/email.service'
 
 const appRoutes: Routes = [
   { path: '', component: EmailComponent},

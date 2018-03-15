@@ -47,7 +47,7 @@
                         <tr>
                           <td>
                             <p class="title" style="text-align: center;font-style: italic;font-size: 1.5em;font-weight: bold;color: #052f85;">
-                              {{title}}
+                              {{email.title}}
                             </p>
                           </td>
                         </tr>
@@ -58,7 +58,7 @@
                         <tr>
                           <td>
                             <p class="info" style="text-align: center;letter-spacing: 1px;font-size: 0.8em;color: #666;">
-                              {{subtitle}}
+                              {{email.sub_title}}
                             </p>
                           </td>
                         </tr>
@@ -80,10 +80,10 @@
                         <tr>
                           <td>
                             <p class="info" style="text-align: center;letter-spacing: 1px;font-size: 0.8em;color: #666;">
-                              {{question}}
+                              {{email.question}}
                             </p>
                             <p class="info" style="text-align: center;letter-spacing: 1px;font-size: 0.8em;color: #666;">
-                              {{additional}}
+                              {{email.additional_information}}
                             </p>
                           </td>
                         </tr>
@@ -103,22 +103,22 @@
       <i class="fas fa-arrow-right"></i>
     </a>
     <p class="editor-title">EDITOR DE PLANTILLA</p>
-    <form>
+    <form #emailForm="ngForm" id="emailForm" (ngSubmit)="insertEmailTemplate()">
       <div class="form-group">
         <label for="title">Título</label>
-        <input id="title" type="text" (keyup)="updatePreview()" name="title" [(ngModel)]="title" />
+        <input id="title" type="text" name="title" [(ngModel)]="email.title" />
       </div>
       <div class="form-group">
         <label for="subtitle">Sub Título</label>
-        <input id="subtitle" type="text" (keyup)="updatePreview()" name="subtitle" [(ngModel)]="subtitle" />
+        <input id="subtitle" type="text" name="subtitle" [(ngModel)]="email.sub_title" />
       </div>
       <div class="form-group">
         <label for="question-info">Información de Preguntas</label>
-        <input id="question-info" type="text" (keyup)="updatePreview()" name="question" [(ngModel)]="question" />
+        <input id="question-info" type="text" name="question" [(ngModel)]="email.question" />
       </div>
       <div class="form-group">
         <label for="additional-info">Información Adicional</label>
-        <input id="additional-info" type="text" (keyup)="updatePreview()" name="additional" [(ngModel)]="additional" />
+        <input id="additional-info" type="text" name="additional" [(ngModel)]="email.additional_information" />
       </div>
       <div class="form-group">
         <label for="language">Lenguaje de la plantilla</label>
@@ -126,7 +126,7 @@
           <option *ngFor="let lang of langs">{{ lang }}</option>
         </select-->
         <mat-form-field>
-          <mat-select [(value)]="selectedLang">
+          <mat-select [(value)]="email.lang">
             <mat-option *ngFor="let lang of langs" [value]="lang">
               {{ lang }}
             </mat-option>

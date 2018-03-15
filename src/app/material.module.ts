@@ -8,4 +8,4 @@ import { MatSelectModule } from '@angular/material/select';
 })
 export class MaterialModule {
 
- }
+}

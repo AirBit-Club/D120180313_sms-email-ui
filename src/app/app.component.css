@@ -24,7 +24,7 @@
 
 .sidenav-btn{
     background-color: transparent;
-    color: #3e3e3e;
+    color: #3F51B5;
     text-decoration: none;
     position: relative;
     display: inline-block;
@@ -39,10 +39,12 @@
 
 .sidenav-btn:hover{
     background-color: rgba(0,0,0,0.1);
+    color: #3F51B5;
 }
 
 .active{
-    background-color: rgba(0,0,0,0.1) !important;
+    background-color: #3F51B5 !important;
+    color: white !important;
 }
 
 .sidenav-item{
