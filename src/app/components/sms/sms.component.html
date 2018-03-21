@@ -1,4 +1,5 @@
 <div class="container">
+  <!-- Búsqueda de plantilla de sms -->
   <div class="search">
     <p class="card-title">Búsqueda de plantilla</p>
     <form id="searchForm" #searchForm="ngForm" (ngSubmit)="search()">
@@ -30,6 +31,9 @@
       </div>
     </form>
   </div>
+  <!-- Fin Búsqueda de plantilla de sms -->
+
+  <!-- Plantilla de sms -->
   <div class="sms-container" *ngIf="sms.lang">
     <p class="card-title">Plantilla de Mensaje</p>
     <form id="smsForm" #smsForm="ngForm" (ngSubmit)="insertMessageTemplate()">
@@ -46,3 +50,5 @@
     </form>
   </div>
 </div>
+
+<!-- Fin Plantilla de sms -->

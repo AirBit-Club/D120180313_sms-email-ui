@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { EmailComponent } from './email.component';
+import { MaterialModule } from '../../material.module';
 
 describe('EmailComponent', () => {
   let component: EmailComponent;
@@ -8,6 +12,12 @@ describe('EmailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        FormsModule,
+        MaterialModule,
+        HttpClientModule,
+        BrowserAnimationsModule
+      ],
       declarations: [ EmailComponent ]
     })
     .compileComponents();
@@ -19,7 +29,5 @@ describe('EmailComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  it('should create component', () => expect(component).toBeDefined());
 });

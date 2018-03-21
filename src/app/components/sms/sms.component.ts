@@ -27,28 +27,30 @@ export class SmsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.langs = ['EN', 'ES', 'JA'];
+    this.langs = ['EN', 'ES', 'JA', 'HI', 'DE', 'PT', 'RU', 'zh-CN', 'IT', 'FR', 'SVN', 'TR', 'HE'];
     this.saveBtn = 'Crear Plantilla';
     this.tipos = new Array();
     this.sms = new Sms('', 2, '', '', 1);
     this.existe = true;
+    //Se obtienen los tipos de mensaje.
     this.smsService.getMessageType().subscribe(
       response => {
         for (const tipo of response) {
-          const type = { description: tipo.fields.description, id: tipo.pk };
+          const type = { description: tipo.description, id: tipo.id };
           this.tipos.push(type);
         }
       },
       error => {
-
+        console.log(error);
+        swal('Información', 'Ocurrió un error al obtener los datos.', 'warning');
       }
     );
   }
 
+  //Método para insertar una nueva plantilla de sms utilizando el método create del servicio smsService
   insertMessageTemplate() {
-    const data: Data = new Data(this.sms);
-    const params = JSON.stringify(data);
-    this.smsService.send(params).subscribe(
+    const params: string = '{"data":' + JSON.stringify(this.sms) + '}'; //String con el JSON que recibe el método create
+    this.smsService.create(params).subscribe(
       response => {
         swal('Ok', 'Success!', 'success');
         this.existe = true;
@@ -59,30 +61,30 @@ export class SmsComponent implements OnInit {
     );
   }
 
+  //Método para buscar la plantilla con el lenguaje y tipo de mensaje seleccionado en la vista.
   search() {
     this.smsService.getLastVersion(this.sms.message_type, this.sms.lang).subscribe(
       response => {
-        this.sms.message = response.fields.message;
-        this.sms.title = response.fields.title;
-        this.saveBtn = 'Editar Plantilla';
-        this.existe = true;
+        //Si exite la plantilla, se colocan los datos correspondientes y el botón mostrará editar en lugar de crear plantilla
+        if(response.data.message){
+          this.sms.message = response.data.message;
+          this.sms.title = response.data.title;
+          this.saveBtn = 'Editar Plantilla';
+          this.existe = true;
+        }else{
+          //Si no exite la plantilla, el botón mostrará crear plantilla
+          this.sms.message = '';
+          this.sms.title = '';
+          this.saveBtn = 'Crear plantilla';
+          this.existe = false;
+        }
       },
       error => {
         this.sms.message = '';
         this.sms.title = '';
-        if (error.status !== 404) {
-          swal('Oops...', 'Ocurrió un error al obtener información. Inténtalo de nuevo en unos minutos.', 'error');
-          this.existe = true;
-        } else {
-          this.saveBtn = 'Crear plantilla';
-          this.existe = false;
-        }
+        swal('Oops...', 'Ocurrió un error al obtener información. Inténtalo de nuevo en unos minutos.', 'error');
+        this.existe = true;
       }
     );
   }
-
-}
-
-export class Data {
-  constructor(public data: Sms) { }
 }

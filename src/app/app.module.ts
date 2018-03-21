@@ -14,7 +14,7 @@ import { SmsComponent } from './components/sms/sms.component';
 import { SmsService } from './services/sms.service';
 import { EmailService } from './services/email.service'
 
-const appRoutes: Routes = [
+export const appRoutes: Routes = [
   { path: '', component: EmailComponent},
   { path: 'email', component: EmailComponent},
   { path: 'sms', component: SmsComponent}

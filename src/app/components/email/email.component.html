@@ -2,6 +2,7 @@
   <a id="show-btn" class="show-editor" (click)="showEditor()">
     <i class="fas fa-arrow-left"></i>
   </a>
+  <!-- Preview de template -->
   <div class="preview" id="iframe">
     <table id="bodyTable" align="center" border="0" cellpadding="0" height="100vh" width="100%">
       <tbody>
@@ -69,7 +70,7 @@
                         <tr>
                           <td>
                             <p class="token" style="text-align: center;font-style: italic;font-size: 2em;font-weight: bold;color: #052f85;">
-                              A00BF2E6B59DAA
+                              /*RECURSO*/
                             </p>
                           </td>
                         </tr>
@@ -98,42 +99,61 @@
       </tbody>
     </table>
   </div>
+  <!-- Fin de Preview de template -->
+
+  <!-- Panel de edición -->
   <div id="editor-panel" class="editor editor-panel">
     <a class="hide-editor" (click)="hideEditor()">
       <i class="fas fa-arrow-right"></i>
     </a>
     <p class="editor-title">EDITOR DE PLANTILLA</p>
     <form #emailForm="ngForm" id="emailForm" (ngSubmit)="insertEmailTemplate()">
-      <div class="form-group">
-        <label for="title">Título</label>
-        <input id="title" type="text" name="title" [(ngModel)]="email.title" />
+
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
+          <div class="form-group">
+            <label for="language">Lenguaje de la plantilla</label>
+            <mat-form-field>
+              <mat-select [(value)]="email.lang" (selectionChange)="searchTemplate()">
+                <mat-option *ngFor="let lang of langs" [value]="lang">
+                  {{ lang }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="form-group">
+              <label for="language">Plantilla para:</label>
+              <mat-form-field>
+                <mat-select id="template-select" [(value)]="email.template" (selectionChange)="searchTemplate()">
+                  <mat-option *ngFor="let template of templates" [value]="template.id">
+                    {{ template.description }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="subtitle">Sub Título</label>
-        <input id="subtitle" type="text" name="subtitle" [(ngModel)]="email.sub_title" />
-      </div>
-      <div class="form-group">
-        <label for="question-info">Información de Preguntas</label>
-        <input id="question-info" type="text" name="question" [(ngModel)]="email.question" />
-      </div>
-      <div class="form-group">
-        <label for="additional-info">Información Adicional</label>
-        <input id="additional-info" type="text" name="additional" [(ngModel)]="email.additional_information" />
-      </div>
-      <div class="form-group">
-        <label for="language">Lenguaje de la plantilla</label>
-        <!--select class="form-control" id="power" [(ngModel)]="selectedLang" name="selectedLang" required>
-          <option *ngFor="let lang of langs">{{ lang }}</option>
-        </select-->
-        <mat-form-field>
-          <mat-select [(value)]="email.lang">
-            <mat-option *ngFor="let lang of langs" [value]="lang">
-              {{ lang }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <button class="save-btn" type="submit">Guardar</button>
+      <p class="message" *ngIf="!existe">No existe la plantilla, crea una:</p>
+        <div class="form-group">
+          <label for="title">Título</label>
+          <input id="title" type="text" name="title" [(ngModel)]="email.title" required/>
+        </div>
+        <div class="form-group">
+          <label for="subtitle">Sub Título</label>
+          <input id="subtitle" type="text" name="subtitle" [(ngModel)]="email.sub_title" required/>
+        </div>
+        <div class="form-group">
+          <label for="question-info">Información de Preguntas</label>
+          <input id="question-info" type="text" name="question" [(ngModel)]="email.question" required/>
+        </div>
+        <div class="form-group">
+          <label for="additional-info">Información Adicional</label>
+          <input id="additional-info" type="text" name="additional" [(ngModel)]="email.additional_information" required/>
+        </div>
+        <button class="save-btn" type="submit" *ngIf="emailForm.valid">{{saveBtn}}</button>
     </form>
+    </div>
   </div>
-</div>
+  <!-- Fin Panel de edición -->
