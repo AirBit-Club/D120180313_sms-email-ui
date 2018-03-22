@@ -19,7 +19,7 @@ import { SmsComponent } from './components/sms/sms.component';
 import { MaterialModule } from './material.module';
 
 
-describe('AppComponent', () => {
+describe('Component: App', () => {
 
   let location: Location;
   let router: Router;
