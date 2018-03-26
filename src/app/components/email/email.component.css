@@ -6,7 +6,7 @@
 
 .editor-panel{
     background-color: rgb(231, 231, 231);
-    padding: 30px;
+    padding: 31px;
     box-shadow: 0 1px 10px rgba(0,0,0,0.25), 0 1px 1px rgba(0,0,0,0.22);
     z-index: 1;
     transition: all 0.5s ease-in; 
